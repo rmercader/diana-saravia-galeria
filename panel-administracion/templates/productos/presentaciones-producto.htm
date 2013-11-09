@@ -1,0 +1,104 @@
+<script language="javascript" src="templates/src/helper-productos.js"></script>
+<script language="javascript" src="templates/src/jquery.numeric.js"></script>
+{literal}
+<style>
+	#container { 
+		width: 500px; 
+	}
+</style>
+<script>
+	var imgOrder = '';	
+
+	$(function() {
+  		$("#container").sortable({
+			update: function(event, ui) {
+	  			imgOrder = $("#container").sortable('toArray').toString();
+			}
+		});
+		$("#container").disableSelection();
+	});		
+	
+	function eliminarPresentacion(id_presentacion){
+		if(confirm("¿Está seguro de eliminar la presentación seleccionada?")){
+			//document.getElementById("container").innerHTML = "<img src=\"templates/img/spinner.gif\" />";
+			$("#container").html("<img src=\"templates/img/spinner.gif\" />");
+			xajax_eliminarPresentacion(id_presentacion);
+		}
+	}
+
+	$(document).ready(function(){
+		
+		$(".numeric").numeric();
+
+		$("#btSalvar").click(function(){
+			var errores = "";
+			var nombre = $("#nombre_presentacion").val();
+			var precio = $("#precio").val();
+
+			if(trim(nombre) == ""){
+				errores += "El campo Nombre de presentación es requerido.\n";
+			}
+
+			if(trim(precio) == ""){
+				errores += "El campo Precio unitario es requerido.\n";
+			}
+			else if(isNaN(precio)){
+				errores += "El campo Precio unitario requiere un número válido.\n";
+			}
+			else if(precio*1 <= 0){
+				errores += "El campo Precio unitario requiere un valor mayor que cero.\n";
+			}
+
+			if(errores == ""){
+				document.forms["frmPresentaciones"].submit();
+			}
+			else{
+				alert(errores);
+			}
+		});
+	});
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmPresentaciones">	
+	{$NAVEGADOR}
+	<div class="button">
+		<img src="templates/img/ico-btn-editar.gif" alt="Editar detalles" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=productos&COD={$id_producto}&ACC=M" />
+		<b>Editar detalles</b>
+	</div>
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-catalogo.php?MOD=fotos-producto&COD={$id_producto}&ACC=M" />
+		<b>Administrar fotos</b>
+	</div>
+	<div class="clear" />
+	<br />
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre de presentación</div>
+		<input type="text" name="nombre_presentacion" id="nombre_presentacion" size="20" maxlength="20" />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Precio unitario</div>
+		<input type="text" name="precio" id="precio" size="10" value="{$precio}" class="numeric" />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<div class="button" style="position: relative; bottom: 0px; width: 90px" id="btSalvar"><b>Salvar</b></div>
+	</div>
+	<div class="clear" style="height: 20px;"></div>
+	<div class="clear">
+		<div id="container">
+			{$htmlPresentaciones}
+			<div class="clear"></div>
+		</div>
+	</div>
+    <input type="hidden" name="subepresentacion" id="subepresentacion" />
+	<input type="hidden" name="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_producto" id="id_producto" value="{$id_producto}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.forms["frmPresentaciones"].elements["ERROR"].value != "")
+		alert(document.forms["frmPresentaciones"].elements["ERROR"].value);
+</script>
+{/literal}

@@ -1,0 +1,31 @@
+<form action="" method="POST" enctype="multipart/form-data" name="frmMensaje">	
+	{$NAVEGADOR}
+	<div class="clear">
+		<div class="tit-campo">Fecha</div>
+		<input type="text" name="fecha" size="20" value="{$fecha}" readonly="readonly">
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre" size="40" value="{$nombre|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Email</div>
+		<input type="text" name="email" size="40" value="{$email}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Teléfono</div>
+		<input type="text" name="telefono" size="20" value="{$telefono|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+	<div class="clear">
+		<div class="tit-campo">Mensaje</div>
+		<textarea name="mensaje" id="mensaje" cols="80" rows="6" {$SOLO_LECTURA}>{$mensaje|utf8_encode}</textarea>
+	</div>
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_mensaje" value="{$id_mensaje}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

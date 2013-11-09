@@ -1,0 +1,16 @@
+[13-12-2012 03:28] Ocurrio un error al salvar la imagen chrysanthemum.jpg de producto 4 a la base de datos.
+Duplicate entry '4-chrysanthemum' for key 'PRIMARY'
+Archivo: producto.class.php
+Operacion: asociarNuevaFoto(4, C:\wamp\tmp\php7322.tmp, Chrysanthemum.jpg)
+[13-12-2012 03:29] Ocurrio un error al salvar la imagen chrysanthemum.jpg de producto 4 a la base de datos.
+Duplicate entry '4-chrysanthemum' for key 'PRIMARY'
+Archivo: producto.class.php
+Operacion: asociarNuevaFoto(4, C:\wamp\tmp\phpB3C.tmp, Chrysanthemum.jpg)
+[13-12-2012 04:08] Ocurrio un error al salvar la imagen lighthouse.jpg de resultado 1 a la base de datos.
+Duplicate entry '1-lighthouse' for key 'PRIMARY'
+Archivo: resultado.class.php
+Operacion: asociarNuevaFoto(1, C:\wamp\tmp\phpDEDE.tmp, Lighthouse.jpg)
+[13-12-2012 04:15] Ocurrio un error al salvar la imagen chrysanthemum.jpg de producto 2 a la base de datos.
+Duplicate entry '2-chrysanthemum' for key 'PRIMARY'
+Archivo: producto.class.php
+Operacion: asociarNuevaFoto(2, C:\wamp\tmp\php3202.tmp, Chrysanthemum.jpg)

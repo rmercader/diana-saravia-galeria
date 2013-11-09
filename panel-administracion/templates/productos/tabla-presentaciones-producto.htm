@@ -1,0 +1,21 @@
+<table cellspacing="0" cellpadding="4" width="280">
+	<tr>
+		<td class="nivel01" width="200">Presentación</td>
+		<td class="nivel01" width="50">Precio</td>
+		<td class="nivel01">&nbsp;</td>
+	</tr>
+{foreach $presentaciones as $presentacion}
+	<tr>
+		<td class="nivel02" align="left" width="200">{$presentacion.nombre_presentacion}</td>
+		<td class="nivel02" width="50" align="right">{$presentacion.precio}</td>
+		<td class="nivel02" align="center">
+			<a href="javascript:;" onclick="eliminarPresentacion({$presentacion.id_presentacion});">
+				<img border="0" alt="eliminar" src="templates/img/ico-lst-eliminar.gif" />
+			</a>
+		</td>
+	</tr>
+{foreachelse}
+<br />
+<b>No se encontró ninguna presentación asociada al producto.<b/>
+{/foreach}
+</table>

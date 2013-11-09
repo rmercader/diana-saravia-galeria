@@ -1,0 +1,112 @@
+﻿{literal}
+<script language="javascript" src="templates/src/helper-resultados.js"></script>
+<link rel="stylesheet" type="text/css" href="templates/src/jquery.rte.css">
+<script type="text/javascript" src="templates/src/jquery.rte.js"></script>
+<script type="text/javascript" src="templates/src/jquery.rte.tb.js"></script>
+<script type="text/javascript" src="templates/src/jquery.ocupload-1.1.4.js"></script>
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+	var diagramacion = $('input:radio[name=diagramacion]:checked').val();
+	
+	if(typeof diagramacion == "undefined" || diagramacion == ""){
+		errores += "Es requerido seleccionar una diagramación.\n";
+	}
+	if (trim($("#nombre_resultado").val()) == ""){
+		errores += "Es requerido especificar un nombre de resultado.\n";
+	}
+	if(errores != ""){
+		alert("No es posible ingresar el resultado:\n"+errores);
+	}
+	else{
+		$("#descripcion").val($("#txt_descripcion").contents().find("body").html());
+		document.forms["frmResultado"].submit();
+	}
+}
+
+function seleccionDiagramacion(nroDiagramacion){
+	document.getElementById('diagramacion' + nroDiagramacion).checked = true;
+}
+
+$(document).ready(function(){
+
+	arr = $('.rte1').rte({
+		css: ['default.css'],
+		controls_rte: rte_toolbar,
+		controls_html: html_toolbar
+	});
+
+	var diag = $("#diag").val();
+	document.getElementById('diagramacion' + diag).checked = true;
+});
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmResultado" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	{if $ACC eq 'M'}
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-resultados.php?MOD=fotos-resultado&COD={$id_resultado}" />
+		<b>Administrar fotos</b>
+	</div>
+	<div class="clear" />
+	{/if}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre_resultado" id="nombre_resultado" size="30" value="{$nombre_resultado}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Marca</div>
+		{if $SOLO_LECTURA neq ''}
+		<input type="text" name="marca_nom" value="{$marca_nom}" {$SOLO_LECTURA}>
+		{else}
+		<select id="marca" name="marca">
+			{html_options output=$marca_dsc values=$marca_ids selected=$marca}
+		</select>
+		{/if}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Visible en el sitio<input type="checkbox" name="visible" id="visible" {$visible}><label>
+	</div>
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Salvar y continuar<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+	<div class="clear"></div>
+	<div style="float: left">
+		<div class="tit-campo">Descripción</div>
+		<textarea class="rte1" id="txt_descripcion" name="txt_descripcion" {$SOLO_LECTURA} cols="80" rows="8">{$descripcion}</textarea>
+	</div>
+	<div style="float: left">
+		<div class="tit-campo" style="padding-left: 100px;">Diagramación</div>
+		<div style="width: 250px; padding: 10px;">
+			<input type="radio" name="diagramacion" value="1" id="diagramacion1" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion1.jpg" alt="diagramacion1" class="img_diagramacion" title="VERTICAL: Título, foto, texto" onclick="seleccionDiagramacion(1);" />
+			
+			<input type="radio" name="diagramacion" value="2" id="diagramacion2" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion2.jpg" alt="diagramacion2" class="img_diagramacion" title="Título, texto a la izquierda, dos fotos (una arriba de la otra) a la derecha del texto" onclick="seleccionDiagramacion(2);" />
+		</div>	
+		<div style="width: 250px; padding: 10px;">
+			<input type="radio" name="diagramacion" value="3" id="diagramacion3" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion3.jpg" alt="diagramacion3" class="img_diagramacion"  title="VERTICAL: Título, texto, foto" onclick="seleccionDiagramacion(3);" />
+
+			<input type="radio" name="diagramacion" value="4" id="diagramacion4" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion4.jpg" alt="diagramacion4" class="img_diagramacion" title="Título, dos fotos (una arriba de la otra), texto a la derecha de las fotos" onclick="seleccionDiagramacion(4);" />
+		</div>
+	</div>
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_resultado" id="id_resultado" value="{$id_resultado}">
+	<input type="hidden" name="descripcion" id="descripcion" />
+	<input type="hidden" name="diag" id="diag" value="{$diagramacion}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

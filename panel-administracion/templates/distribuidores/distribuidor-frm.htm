@@ -1,0 +1,70 @@
+{literal}
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+	if(trim($("#nombre_distribuidor").val()) == ""){
+		errores += "El nombre es requerido.\n";
+	}
+	if(trim($("#url").val()) == ""){
+		errores += "La Url es requerida.\n";
+	}
+	if(trim($("#id_distribuidor").val()) == "" && $("#imagen").val() == ""){
+		errores += "La Imagen es requerida.\n";
+	}
+	
+	if(errores != ""){
+		alert("No es posible ingresar el distribuidor:\n"+errores);
+	}
+	else{
+		document.forms["frmDistribuidor"].submit();
+	}
+}
+
+</script>
+{/literal}
+
+<form action="" method="POST" enctype="multipart/form-data" name="frmDistribuidor" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" id="nombre_distribuidor" name="nombre_distribuidor" size="30" value="{$nombre_distribuidor}" {$SOLO_LECTURA} />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Url</div>
+		<input type="text" name="url" id="url" size="60" value="{$url}" {$SOLO_LECTURA} />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Teléfono</div>
+		<input type="text" id="telefono" name="telefono" size="30" value="{$telefono}" {$SOLO_LECTURA} maxlength="20" />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Dirección</div>
+		<input type="text" id="direccion" name="direccion" size="60" value="{$direccion}" {$SOLO_LECTURA} maxlength="38" />
+	</div>
+	{if $SOLO_LECTURA neq ''}
+	<div class="celda-campo clear">
+		<div class="tit-campo">Imagen</div>
+		<img alt="Imagen no disponible" src="{$src_imagen}" border="0" />
+	</div>
+	{else}
+	<div class="celda-campo clear">
+		<div class="tit-campo">Imagen miniatura (Asegurarse de que sea JPG o JPEG)</div>
+		<input type="file" name="imagen" id="imagen" size="80" />
+	</div>
+	{/if}
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Salvar y continuar<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_distribuidor" id="id_distribuidor" value="{$id_distribuidor}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

@@ -1,0 +1,8 @@
+[11-12-2012 04:29] distribuidor
+[24-2-2013 20:11] 
+[24-2-2013 20:11] SELECT id_producto FROM producto_presentacion WHERE id_presentacion = 
+[24-2-2013 20:12] SELECT id_producto FROM producto_presentacion WHERE id_presentacion = 3
+[24-2-2013 20:12] SELECT id_producto FROM producto_presentacion WHERE id_presentacion = 2
+[24-2-2013 20:12] SELECT id_producto FROM producto_presentacion WHERE id_presentacion = 1
+[26-2-2013 02:26] SELECT id_producto FROM producto_presentacion WHERE id_presentacion = 6
+[26-2-2013 02:27] SELECT id_producto FROM producto_presentacion WHERE id_presentacion = 7

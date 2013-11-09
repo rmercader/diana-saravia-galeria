@@ -1,0 +1,50 @@
+<table cellspacing="0" cellpadding="2" width="100%">
+	<tr>
+		<td class="nivel01">
+			Pedido N°
+		</td>
+		<td class="nivel01">
+			Fecha
+		</td>
+		<td class="nivel01">
+			Estado
+		</td>
+		<td class="nivel01">
+			Nombre
+		</td>
+		<td class="nivel01">
+			Email
+		</td>
+		<td class="nivel01">
+			Telefono
+		</td>
+		<td class="nivel01">
+			Direccion
+		</td>
+		<td class="nivel01">
+			Ciudad
+		</td>
+		<td class="nivel01">
+			Dpto
+		</td>
+		<td class="nivel01">
+			Total
+		</td>
+		<td align="center" width="20" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td class="nivel02" align="center">{$REG[linea].id}</td>
+		<td class="nivel02" align="left">{$REG[linea].fechaDsc}</td>
+		<td class="nivel02" align="left">{$REG[linea].estado|upper}</td>
+		<td class="nivel02" align="left">{$REG[linea].nombre|utf8_encode}</td>
+		<td class="nivel02" align="left">{$REG[linea].email}</td>
+		<td class="nivel02" align="left">{$REG[linea].telefono|utf8_encode}</td>
+		<td class="nivel02" align="left">{$REG[linea].direccion|utf8_encode}</td>
+		<td class="nivel02" align="left">{$REG[linea].ciudad|utf8_encode}</td>
+		<td class="nivel02" align="left">{$REG[linea].departamento|utf8_encode}</td>
+		<td class="nivel02" align="right">{$REG[linea].total}</td>
+		<td width="20" align="left" class="nivel02" nowrap="nowrap">{include file="base_accion_grid.htm"}</td>
+	</tr>
+	{/section}
+</table>

@@ -1,0 +1,24 @@
+<table width="98%" align="center" cellspacing="0">
+	<tr>
+		<td align="center" width="15%" class="nivel01">Identificador</td>
+		<td align="center" class="nivel01">Título</td>
+		<td align="center" class="nivel01">Marca</td>
+		<td align="center" class="nivel01">Vista previa</td>
+		<td align="center" width="50px" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td align="center" class="nivel02">{$REG[linea].id}</td>
+		<td align="left" class="nivel02">{$REG[linea].titulo}</td>
+		<td align="left" class="nivel02">{$REG[linea].marca}</td>
+		<td align="left" class="nivel02" width="{$w}" height="{$h}">
+			<a href="https://www.youtube.com/watch?v={$REG[linea].codigo}" target="_blank">
+				<img alt="No disponible" title="{$REG[linea].titulo}" src="http://img.youtube.com/vi/{$REG[linea].codigo}/1.jpg" border="0" />
+			</a>
+		</td>
+		<td width="50px" class="nivel02" nowrap="nowrap">
+			{include file="base_accion_grid.htm"}
+		</td>
+	</tr>
+	{/section}
+</table>

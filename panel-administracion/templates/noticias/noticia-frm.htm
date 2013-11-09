@@ -1,0 +1,125 @@
+{literal}
+<script language="javascript" src="templates/src/helper-noticias.js"></script>
+<link rel="stylesheet" type="text/css" href="templates/src/jquery.rte.css">
+<script type="text/javascript" src="templates/src/jquery.rte.js"></script>
+<script type="text/javascript" src="templates/src/jquery.rte.tb.js"></script>
+<script type="text/javascript" src="templates/src/jquery.ocupload-1.1.4.js"></script>
+<script language="javascript">
+
+var arr;
+
+function before_submit(){
+	var errores = "";
+	var diagramacion = $('input:radio[name=diagramacion]:checked').val();
+	
+	if(typeof diagramacion == "undefined" || diagramacion == ""){
+		errores += "Es requerido seleccionar una diagramación.\n";
+	}
+	if (trim($("#titulo").val()) == ""){
+		errores += "Es requerido especificar un título de noticia.\n";
+	}
+	if (trim($("#copete").val()) == ""){
+		errores += "Es requerido especificar un texto inicial de noticia.\n";
+	}
+	if(errores != ""){
+		alert("No es posible ingresar la noticia:\n"+errores);
+	}
+	else{
+		$("#cuerpo").val($("#txt_cuerpo").contents().find("body").html());
+		document.forms["frmProducto"].submit();
+	}
+}
+
+function seleccionDiagramacion(nroDiagramacion){
+	document.getElementById('diagramacion' + nroDiagramacion).checked = true;
+}
+
+$(document).ready(function(){
+
+	arr = $('.rte1').rte({
+		css: ['default.css'],
+		controls_rte: rte_toolbar,
+		controls_html: html_toolbar
+	});
+
+	var diag = $("#diag").val();
+	document.getElementById('diagramacion' + diag).checked = true;
+
+});
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmProducto" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	{if $ACC eq 'M'}
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-noticias.php?MOD=fotos-noticia&COD={$id_noticia}" />
+		<b>Administrar fotos</b>
+	</div>
+	{/if}
+	<div class="clear"></div>
+	{if $SOLO_LECTURA neq ''}
+	<div class="celda-campo clear">
+		<div class="tit-campo">Imagen</div>
+		<img alt="Imagen no disponible" src="{$src_imagen}" border="0" />
+	</div>
+	{else}
+	<div class="celda-campo">
+		<div class="tit-campo">Imagen miniatura (Asegurarse de que sea JPG o JPEG)</div>
+		<input type="file" name="miniatura" id="miniatura" size="60" />
+	</div>
+	{/if}
+	<div class="clear"></div>
+	<div class="celda-campo">
+		<div class="tit-campo">Título</div>
+		<input type="text" name="titulo" id="titulo" size="60" value="{$titulo}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Visible en el sitio<input type="checkbox" name="visible" id="visible" {$visible}><label>
+	</div>
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Salvar y continuar<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+	<div class="clear">
+		<div class="tit-campo">Texto inicial</div>
+		<textarea id="copete" name="copete" {$SOLO_LECTURA} cols="50" rows="6">{$copete}</textarea>
+	</div>
+	<div class="clear"></div>
+	<div style="float: left">
+		<div class="tit-campo">Texto principal</div>
+		<textarea class="rte1" id="txt_cuerpo" name="txt_cuerpo" {$SOLO_LECTURA} cols="80" rows="8">{$cuerpo}</textarea>
+	</div>
+	<div style="float: left">
+		<div class="tit-campo" style="padding-left: 100px;">Diagramación</div>
+		<div style="width: 250px; padding: 10px;">
+			<input type="radio" name="diagramacion" value="1" id="diagramacion1" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion1.jpg" alt="diagramacion1" class="img_diagramacion" title="VERTICAL: Título, foto, texto" onclick="seleccionDiagramacion(1);" />
+			
+			<input type="radio" name="diagramacion" value="2" id="diagramacion2" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion2.jpg" alt="diagramacion2" class="img_diagramacion" title="Título, texto a la izquierda, dos fotos (una arriba de la otra) a la derecha del texto" onclick="seleccionDiagramacion(2);" />
+		</div>	
+		<div style="width: 250px; padding: 10px;">
+			<input type="radio" name="diagramacion" value="3" id="diagramacion3" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion3.jpg" alt="diagramacion3" class="img_diagramacion"  title="VERTICAL: Título, texto, foto" onclick="seleccionDiagramacion(3);" />
+
+			<input type="radio" name="diagramacion" value="4" id="diagramacion4" class="radio_diagramacion" />
+			<img src="templates/img/diagramacion4.jpg" alt="diagramacion4" class="img_diagramacion" title="Título, dos fotos (una arriba de la otra), texto a la derecha de las fotos" onclick="seleccionDiagramacion(4);" />
+		</div>
+	</div>
+	
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_noticia" value="{$id_noticia}">
+	<input type="hidden" name="cuerpo" id="cuerpo" />
+	<input type="hidden" name="diag" id="diag" value="{$diagramacion}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

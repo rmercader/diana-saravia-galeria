@@ -1,0 +1,24 @@
+<table width="98%" align="center" cellspacing="0">
+	<tr>
+		<td align="center" width="15%" class="nivel01">Identificador</td>
+		<td align="center" class="nivel01">Nombre del resultado</td>
+		<td align="center" class="nivel01">Marca</td>
+		<td align="center" class="nivel01">Visible</td>
+        <!--<td align="center" class="nivel01">Foto</td>-->
+		<td align="center" width="100px" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td align="center" class="nivel02">{$REG[linea].id}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_resultado}</td>
+		<td align="left" class="nivel02">{$REG[linea].marca}</td>
+		<td align="left" class="nivel02">{$REG[linea].visible}</td>
+		<td width="100px" class="nivel02" nowrap="nowrap">
+			<a href="admin-resultados.php?MOD=fotos-resultado&COD={$REG[linea].id}" title="Administrar fotos">
+                <img src="templates/img/ico-lst-fotos.png" alt="Administrar fotos" border="0" hspace="2">
+            </a>
+			{include file="base_accion_grid.htm"}
+		</td>
+	</tr>
+	{/section}
+</table>

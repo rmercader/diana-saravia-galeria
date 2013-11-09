@@ -1,0 +1,67 @@
+{literal}
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+	if (trim($("#titulo").val()) == ""){
+		errores += "Es requerido especificar un título de imagen.\n";
+	}
+	if(errores != ""){
+		alert("No es posible ingresar la imagen:\n"+errores);
+	}
+	else{
+		document.forms["frmImagen"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmImagen" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="clear"></div>
+	{if $SOLO_LECTURA neq ''}
+	<div class="celda-campo clear">
+		<div class="tit-campo">Imagen</div>
+		<img alt="Imagen no disponible" src="{$src_imagen}" border="0" />
+	</div>
+	{else}
+	<div class="celda-campo">
+		<div class="tit-campo">Imagen (Asegurarse de que sea JPG o JPEG)</div>
+		<input type="file" name="imagen" id="imagen" size="60" />
+	</div>
+	{/if}
+	<div class="clear"></div>
+	<div class="celda-campo">
+		<div class="tit-campo">Título</div>
+		<input type="text" name="titulo" id="titulo" size="60" value="{$titulo}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Marca</div>
+		{if $SOLO_LECTURA neq ''}
+		<input type="text" name="marca_nom" value="{$marca_nom}" {$SOLO_LECTURA}>
+		{else}
+		<select id="marca" name="marca">
+			{html_options output=$marca_dsc values=$marca_ids selected=$marca}
+		</select>
+		{/if}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Marcar si es imagen del slider<input type="checkbox" name="portada" id="portada" {$portada}><label>
+	</div>
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Salvar y continuar<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+	
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_imagen" value="{$id_imagen}" id="{$id_imagen}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

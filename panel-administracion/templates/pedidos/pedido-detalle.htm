@@ -1,0 +1,89 @@
+<script type="text/javascript">
+	function cambiarEstado(){
+		var idPedido = $("#id_pedido").val(),
+			estado = $("#estado").val();
+		xajax_modificarEstado(idPedido, estado);
+	}
+</script>
+<form action="" method="POST" enctype="multipart/form-data" name="frmPedido" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	<div class="celda-campo">
+		<div class="tit-campo">Nro. Pedido</div>
+		<input type="text" name="id_pedido" id="id_pedido" size="10" value="{$id_pedido}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Fecha</div>
+		<input type="text" name="fecha_registrado" id="fecha_registrado" size="15" value="{$fecha_registrado}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">Estado del pedido</div>
+		<select name="estado" id="estado">
+			{html_options values=$ids_estados selected=$estado output=$dsc_estados}
+		</select>
+	</div>
+	<div class="celda-campo" style="padding-top: 10px;">
+		<a href="javascript:cambiarEstado();">
+			<img src="templates/img/actualizar.png" alt="Actualizar" border="0" title="Actualizar estado" />
+		</a>
+	</div>
+	<div class="clear"></div>
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre y apellido</div>
+		<input type="text" name="nombre" id="nombre" size="40" value="{$nombre|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-campo">Email</div>
+		<input type="text" name="email" id="email" size="40" value="{$email}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-campo">Teléfono</div>
+		<input type="text" name="telefono" id="telefono" size="20" value="{$telefono|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-campo">Dirección</div>
+		<input type="text" name="direccion" id="direccion" size="40" value="{$direccion|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-campo">Ciudad</div>
+		<input type="text" name="ciudad" id="ciudad" size="15" value="{$ciudad|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-campo">Departamento</div>
+		<input type="text" name="departamento" id="departamento" size="20" value="{$departamento|utf8_encode}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="clear"></div>
+	<div class="celda-campo">
+		<div class="tit-campo">Total</div>
+		<input type="text" name="total" id="total" size="10" value="{$total}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="clear">
+		<table cellspacing="0" cellpadding="4" width="70%">
+			<tr>
+				<td class="nivel01" colspan="6" style="border-bottom: none">Detalles del pedido</td>
+			</tr>	
+			<tr>
+				<td class="nivel01">Producto</td>
+				<td class="nivel01">Presentación</td>
+				<td class="nivel01">Cantidad</td>
+				<td class="nivel01">Unitario</td>
+				<td class="nivel01">Subtotal</td>
+			</tr>
+		{foreach $items as $item}
+			<tr>
+				<td class="nivel02" align="left">{$item.nombre_producto}</td>
+				<td class="nivel02" align="left">{$item.nombre_presentacion}</td>
+				<td class="nivel02" align="right">{$item.cantidad}</td>
+				<td class="nivel02" align="right">{$item.precio}</td>
+				<td class="nivel02" align="right">{$item.subtotal}</td>
+			</tr>
+		{/foreach}
+		</table>
+	</div>
+</form>

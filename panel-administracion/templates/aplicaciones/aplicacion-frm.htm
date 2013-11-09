@@ -1,0 +1,54 @@
+{literal}
+<script language="javascript" src="templates/src/helper-aplicaciones.js"></script>
+<script language="javascript">
+
+function before_submit(){
+	var errores = "";
+	
+	if(errores != ""){
+		alert("No es posible ingresar la aplicación:\n"+errores);
+	}
+	else{
+		document.forms["frmAplicacion"].submit();
+	}
+}
+
+</script>
+{/literal}
+<form action="" method="POST" enctype="multipart/form-data" name="frmAplicacion" onsubmit="before_submit(); return false;">	
+	{$NAVEGADOR}
+	{if $ACC eq 'M'}
+	<div class="button">
+		<img src="templates/img/ico-btn-fotos.png" alt="Administrar fotos" border="0">
+		<input type="hidden" class="link" value="admin-aplicaciones.php?MOD=fotos-aplicacion&COD={$id_aplicacion}" />
+		<b>Administrar fotos</b>
+	</div>
+	<div class="clear" />
+	{/if}
+	<div class="celda-campo">
+		<div class="tit-campo">Nombre</div>
+		<input type="text" name="nombre_aplicacion" size="30" value="{$nombre_aplicacion}" {$SOLO_LECTURA}>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Visible en el sitio<input type="checkbox" name="visible" id="visible" {$visible}><label>
+	</div>
+	{if $ACC eq 'A'}
+	<div class="celda-campo">
+		<div class="tit-campo">&nbsp;</div>
+		<label class="tit-campo">Salvar y continuar<input type="checkbox" name="redirigir" id="redirigir" checked="checked"><label>
+	</div>
+	{/if}
+	<div class="clear">
+		<div class="tit-campo">Descripción</div>
+		{$DESCRIPCION}
+	</div>
+	<input type="hidden" name="ERROR" id="ERROR" value="{$ERROR}">
+	<input type="hidden" name="id_aplicacion" value="{$id_aplicacion}">
+</form>
+{literal}
+<script language="javascript">
+	if (document.getElementById("ERROR").value != "")
+		alert(document.getElementById("ERROR").value);
+</script>
+{/literal}

@@ -1,0 +1,67 @@
+<div id="buscador">
+	<div class="celda-campo">
+		<div class="tit-criterio">Pedido N°</div>
+		<input type="text" name="id_pedido" id="id_pedido" value="{$id_pedido}" size="6" />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Fecha Desde</div>
+		{html_select_date prefix="fecha_desde" field_order=DMY time=$fecha_desde start_year="-5"}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Fecha Hasta</div>
+		{html_select_date prefix="fecha_hasta" field_order=DMY time=$fecha_hasta start_year="-5"}
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Estado</div>
+		<select name="estado" id="estado">
+			<option value=""></option>
+			{html_options values=$ids_estados selected=$estado output=$dsc_estados}
+		</select>
+	</div>
+	
+	<div class="celda-campo">
+		<div class="tit-criterio">Nombre y apellido</div>
+		<input type="text" name="nombre" id="nombre" value="{$nombre}" size="20" />
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">Email</div>
+		<input type="text" name="email" id="email" size="20" value="{$email}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-criterio">Teléfono</div>
+		<input type="text" name="telefono" id="telefono" size="20" value="{$telefono}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-criterio">Dirección</div>
+		<input type="text" name="direccion" id="direccion" size="30" value="{$direccion}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-criterio">Ciudad</div>
+		<input type="text" name="ciudad" id="ciudad" size="15" value="{$ciudad}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-criterio">Departamento</div>
+		<input type="text" name="departamento" id="departamento" size="20" value="{$departamento}" {$SOLO_LECTURA}>
+	</div>
+
+	<div class="celda-campo">
+		<div class="tit-criterio">Ordenado por</div>
+		<select name="ORDEN_CAMPO" id="ORDEN_CAMPO">
+			{html_options values=$value_orden_campo selected=$ORDEN_CAMPO output=$dsc_orden_campo}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<div class="tit-criterio">En orden</div>
+		<select name="ORDEN" id="ORDEN">
+			{html_options values=$value_orden selected=$ORDEN output=$dsc_orden}
+		</select>
+	</div>
+	<div class="celda-campo">
+		<input name="btOK" type="image" id="btOK" src="templates/img/btn-buscar.png" title="Iniciar b&uacute;squeda" vspace="10" class="nada">
+	</div>
+</div>
+

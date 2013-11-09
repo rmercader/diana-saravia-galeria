@@ -1,0 +1,20 @@
+<table width="98%" align="center" cellspacing="0">
+	<tr>
+		<td align="center" width="15%" class="nivel01">Identificador</td>
+		<td align="center" class="nivel01">Nombre</td>
+		<td align="center" class="nivel01">Url</td>
+		<td align="center" class="nivel01">Teléfono</td>
+		<td align="center" width="50px" class="nivel01">&nbsp;</td>
+	</tr>
+	{section name=linea loop=$REG}
+	<tr>
+		<td align="center" class="nivel02">{$REG[linea].id}</td>
+		<td align="left" class="nivel02">{$REG[linea].nombre_distribuidor}</td>
+		<td align="left" class="nivel02"><a href="{$REG[linea].url}" target="_blank">{$REG[linea].url}</a></td>
+		<td align="left" class="nivel02">{$REG[linea].telefono}</td>
+		<td width="50px" class="nivel02" nowrap="nowrap">
+			{include file="base_accion_grid.htm"}
+		</td>
+	</tr>
+	{/section}
+</table>
