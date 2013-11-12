@@ -57,7 +57,6 @@
             <th class="yellow header headerSortDown">Fecha</th>
             <th class="yellow header headerSortDown">Nombre</th>
             <th class="yellow header headerSortDown">Email</th>
-            <th class="yellow header headerSortDown">Teléfono</th>
           </tr>
         </thead>
         <tbody>
@@ -69,7 +68,6 @@
             echo '<td>'.date_format(new DateTime($row['fecha']), 'd/m/Y H:i').'</td>';
             echo '<td>'.$row['nombre'].'</td>';
             echo '<td>'.$row['email'].'</td>';
-            echo '<td>'.$row['telefono'].'</td>';
             echo '<td class="crud-actions">
               <a href="'.site_url("admin").'/mensajes/view/'.$row['id_mensaje'].'" class="btn btn-info">Ver detalles</a>
               <a href="'.site_url("admin").'/mensajes/delete/'.$row['id_mensaje'].'" class="btn btn-danger">Eliminar</a>

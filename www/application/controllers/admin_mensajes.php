@@ -163,4 +163,21 @@ class Admin_mensajes extends CI_Controller {
         redirect('admin/mensajes');
     }
 
+    /**
+    * View item by his id
+    * @return void
+    */
+    public function view()
+    {
+        //evento id 
+        $id = $this->uri->segment(4);
+
+        //evento data 
+        $data['mensaje'] = $this->mensajes_model->get_mensaje_by_id($id);
+        //load the view
+        $data['main_content'] = 'admin/mensajes/view';
+        $this->load->view('includes/template', $data);            
+
+    }//update
+
 }

@@ -1,3 +1,4 @@
+<!--COMIENZA PAGINA -- CONTACTO ---->
 <script type="text/javascript">
 	$(window).load(function() {
 		$('#menu a[id!="link-contacto"]').each(function(i, e){
@@ -5,7 +6,13 @@
 		});
 	});
 </script>
-<!--COMIENZA PAGINA -- CONTACTO ---->
+
+<? if($error != ""): ?>
+<script type="text/javascript">
+	alert('<?=$error?>');
+</script>
+<? endif ?>
+
 <li id="page_Contacto">
 	<div class="box1">
 		<div class="inner">
@@ -25,19 +32,19 @@
 				</div>
 			</div>
 			<h2>Formulario de contacto</h2>
-			<form id="ContactForm">
+			<form id="ContactForm" action="" method="post">
 				<div>
-					<div  class="wrapper">
+					<div class="wrapper">
 						<span>Nombre:</span>
-						<input type="text" class="input" >
+						<input type="text" class="input" name="nombre" id="nombre" value="<?=$nombre?>" />
 					</div>
 					<div  class="wrapper">
 						<span>E-mail:</span>
-						<input type="text" class="input" >
+						<input type="text" class="input" name="email" id="email" value="<?=$email?>" />
 					</div>
 					<div  class="textarea_box">
 						<span>Mensaje:</span>
-						<textarea name="textarea" cols="1" rows="1"></textarea>
+						<textarea name="mensaje" id="mensaje" cols="1" rows="1"><?=$mensaje?></textarea>
 					</div>
 					<div class="wrapper">
 						<span>&nbsp;</span>

@@ -115,6 +115,7 @@ $route['admin/eventos/(:any)'] = 'admin_eventos/index/$1'; //$1 = page number
 
 $route['admin/mensajes'] = 'admin_mensajes/index';
 $route['admin/mensajes/delete/(:any)'] = 'admin_mensajes/delete/$1';
+$route['admin/mensajes/view/(:any)'] = 'admin_mensajes/view/$1';
 $route['admin/mensajes/(:any)'] = 'admin_mensajes/index/$1'; //$1 = page number
 
 /* End of file routes.php */
