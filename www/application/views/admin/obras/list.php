@@ -22,7 +22,8 @@
   <div class="page-header users-header">
     <h2>
       Obras
-      <a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success">Agregar nueva</a>
+      <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success" style="margin-left: 5px;">Agregar nueva</a>
+      <a href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/destacadas" class="btn btn-info">Ordenar destacadas</a>      
     </h2>
   </div>
   
@@ -35,7 +36,7 @@
         $attributes = array('class' => 'form-inline reset-margin', 'id' => 'myform');
        
         //save the columns names in a array that we will use as filter         
-        $options_obras = array('id_obra' => 'Id', 'nombre_obra' => 'Nombre', 'artista.nombre_artista'=>'Artista', 'categoria_obra.nombre_categoria_obra'=>'Categoría');
+        $options_obras = array('nombre_obra' => 'Nombre', 'artista.nombre_artista'=>'Artista', 'categoria_obra.nombre_categoria_obra'=>'Categoría');
 
         echo form_open('admin/obras', $attributes);
  
@@ -63,6 +64,7 @@
             <th class="yellow header headerSortDown">Nombre</th>
             <th class="yellow header headerSortDown">Artista</th>
             <th class="yellow header headerSortDown">Categoría</th>
+            <th class="yellow header headerSortDown">Destacada</th>
             <th class="yellow header headerSortDown">Imagen</th>
           </tr>
         </thead>
@@ -74,6 +76,8 @@
             echo '<td>'.$row['nombre_obra'].'</td>';
             echo '<td>'.$row['nombre_artista'].'</td>';
             echo '<td>'.$row['nombre_categoria_obra'].'</td>';
+            $destacadaDsc = $row['destacada'] ? 'Si' : 'No';
+            echo '<td>'.$destacadaDsc.'</td>';
             echo '<td style="width:' . $thumbnailWidth . 'px;">';
 
             ?>

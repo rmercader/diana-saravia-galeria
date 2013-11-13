@@ -284,10 +284,18 @@ class Admin_obras extends CI_Controller {
                 $nombre_obra = $this->input->post('nombre_obra');
                 $id_artista = $this->input->post('id_artista');
                 $nombreArtista = $this->artistas_model->get_nombre($id_artista);
+                if($this->input->post('destacada')){
+                    $destacada = 1;
+                }
+                else {
+                    $destacada = 0;
+                }
+
                 $data_to_store = array(
                     'nombre_obra' => $nombre_obra,
                     'id_artista' => $id_artista,
-                    'id_categoria_obra' => $this->input->post('id_categoria_obra')                    
+                    'id_categoria_obra' => $this->input->post('id_categoria_obra'),
+                    'destacada' => $destacada
                 );
 
                 //if the insert has returned true then we show the flash message
@@ -375,6 +383,39 @@ class Admin_obras extends CI_Controller {
         @unlink($this->uploadConfig['upload_path'] . $id . ".prv." . $this->uploadConfig['allowed_types']);
         @unlink($this->uploadConfig['upload_path'] . $id . ".thu." . $this->uploadConfig['allowed_types']);
         redirect('admin/obras');
+    }
+
+    // Ordenacion de destacadas
+    public function destacadas()
+    {
+        //if save button was clicked, get the data sent via post
+        if ($this->input->server('REQUEST_METHOD') === 'POST')
+        {
+
+            //form validation
+            $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
+            
+            //if the form has passed through the validation
+            if ($this->form_validation->run())
+            {
+                $data_to_store = array(
+                    'nombre_artista' => $this->input->post('nombre_artista'),
+                    'detalles' => $this->input->post('detalles'),
+                );
+                
+                /*
+                if($this->obras_model->store_artista($data_to_store)){
+                    $data['flash_message'] = TRUE; 
+                }else{
+                    $data['flash_message'] = FALSE; 
+                }*/
+            }
+
+        }
+        
+        //load the view
+        $data['main_content'] = 'admin/obras/ordenacion_destacadas';
+        $this->load->view('includes/template', $data);  
     }
 
 }

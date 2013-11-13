@@ -17,7 +17,7 @@ class Obras_model extends CI_Model {
     */
     public function get_obra_by_id($id)
     {
-		$this->db->select('obra.id_obra, obra.nombre_obra, artista.id_artista, artista.nombre_artista, categoria_obra.id_categoria_obra, categoria_obra.nombre_categoria_obra');
+		$this->db->select("obra.id_obra, obra.nombre_obra, artista.id_artista, artista.nombre_artista, categoria_obra.id_categoria_obra, categoria_obra.nombre_categoria_obra, obra.destacada, obra.orden");
         $this->db->from('obra');
         $this->db->join('artista', 'artista.id_artista = obra.id_artista', 'inner');
         $this->db->join('categoria_obra', 'categoria_obra.id_categoria_obra = obra.id_categoria_obra', 'inner');
@@ -39,7 +39,7 @@ class Obras_model extends CI_Model {
     public function get_obras($search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end=null)
     {
 	    
-		$this->db->select('obra.id_obra, obra.nombre_obra, artista.nombre_artista, categoria_obra.nombre_categoria_obra');
+		$this->db->select('obra.id_obra, obra.nombre_obra, artista.nombre_artista, categoria_obra.nombre_categoria_obra, destacada');
 		$this->db->from('obra');
         $this->db->join('artista', 'artista.id_artista = obra.id_artista', 'inner');
         $this->db->join('categoria_obra', 'categoria_obra.id_categoria_obra = obra.id_categoria_obra', 'inner');

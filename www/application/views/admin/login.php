@@ -20,9 +20,6 @@
           echo '</div>';             
       }
       echo "<br />";
-      echo anchor('admin/signup', 'Signup!');
-      echo "<br />";
-      echo "<br />";
       echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');
       echo form_close();
       ?>      

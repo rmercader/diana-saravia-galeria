@@ -17,7 +17,9 @@
       </a> 
       <span class="divider">/</span>
     </li>
-    <li class="active">Nueva</li>
+    <li class="active">
+      Ordenación de obras destacadas
+    </li>
   </ul>
   
   <div class="page-header">

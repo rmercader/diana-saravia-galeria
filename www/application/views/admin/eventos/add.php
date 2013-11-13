@@ -14,9 +14,7 @@
       </a> 
       <span class="divider">/</span>
     </li>
-    <li class="active">
-      <a href="#">Nuevo</a>
-    </li>
+    <li class="active">Nuevo</li>
   </ul>
   
   <div class="page-header">

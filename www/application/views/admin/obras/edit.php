@@ -18,7 +18,7 @@
       <span class="divider">/</span>
     </li>
     <li class="active">
-      <a href="#">Editar</a>
+      Editar
     </li>
   </ul>
   
@@ -64,13 +64,13 @@
 	        </div>
 	    </div>
 
-		<div class="control-group">
-			<label for="inputError" class="control-label">Artista</label>
-			<div class="controls">
-				<input type="text" id="nombre_artista" name="nombre_artista" value="<?php echo $obra[0]['nombre_artista']; ?>" >
-				<input type="hidden" id="id_artista" name="id_artista" value="<?php echo $obra[0]['id_artista']; ?>" >
-			</div>
-		</div>
+  		<div class="control-group">
+  			<label for="inputError" class="control-label">Artista</label>
+  			<div class="controls">
+  				<input type="text" id="nombre_artista" name="nombre_artista" value="<?php echo $obra[0]['nombre_artista']; ?>" >
+  				<input type="hidden" id="id_artista" name="id_artista" value="<?php echo $obra[0]['id_artista']; ?>" >
+  			</div>
+  		</div>
 
 	    <div class="control-group">
     		<label for="inputError" class="control-label">Categoría</label>
@@ -80,12 +80,19 @@
 	        </div>
 	     </div>
 
-	    <div class="control-group">
+       <div class="control-group">
+        <label for="inputError" class="control-label">Destacada</label>
+          <div class="controls">
+            <input type="checkbox" id="destacada" name="destacada" <?php if($obra[0]['destacada']){echo 'checked="checked"';} ?> >
+          </div>
+       </div>
+
+        <div class="control-group">
 	        <label for="inputError" class="control-label">Archivo de imagen</label>
 	        <div class="controls">
 	        	<input type="file" id="imagen_obra" name="imagen_obra">
 	        </div>
-	    </div>
+        </div>
 
 	    <div class="control-group">
 	        <label for="inputError" class="control-label">Vista previa</label>

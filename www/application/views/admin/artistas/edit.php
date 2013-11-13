@@ -13,9 +13,7 @@
       </a> 
       <span class="divider">/</span>
     </li>
-    <li class="active">
-      <a href="#">Editar</a>
-    </li>
+    <li class="active">Editar</li>
   </ul>
   
   <div class="page-header">
