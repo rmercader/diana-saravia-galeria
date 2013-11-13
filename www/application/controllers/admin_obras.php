@@ -388,6 +388,7 @@ class Admin_obras extends CI_Controller {
     // Ordenacion de destacadas
     public function destacadas()
     {
+        // See more on: http://jqueryui.com/sortable/
         //if save button was clicked, get the data sent via post
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
@@ -414,6 +415,9 @@ class Admin_obras extends CI_Controller {
         }
         
         //load the view
+        $data['previewWidth'] = OBRA_PREVIEW_WIDTH;
+        $data['previewHeight'] = OBRA_PREVIEW_HEIGHT;
+        $data['destacadas'] = $this->obras_model->obtener_destacadas_ordenadas();
         $data['main_content'] = 'admin/obras/ordenacion_destacadas';
         $this->load->view('includes/template', $data);  
     }

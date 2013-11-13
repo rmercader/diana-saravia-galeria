@@ -166,5 +166,16 @@ class Obras_model extends CI_Model {
         return $query->result_array(); 
     }
 
+    function obtener_destacadas_ordenadas(){
+        $this->db->select('obra.id_obra, obra.nombre_obra, artista.nombre_artista');
+        $this->db->from('obra');
+        $this->db->join('artista', 'artista.id_artista = obra.id_artista', 'inner');
+        $this->db->where('destacada', 1);
+        $this->db->order_by('orden', 'ASC');
+        $query = $this->db->get();
+        
+        return $query->result_array(); 
+    }
+
 }
 ?>

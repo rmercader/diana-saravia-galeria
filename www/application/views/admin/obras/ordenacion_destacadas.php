@@ -2,6 +2,16 @@
   var site_url_admin = '<?=site_url("admin")?>';
 </script>
 <script type="text/javascript" src="<?=base_url();?>assets/js/obras.js"></script>
+<style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 600px; }
+  #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: <?=previewWidth?>px; height: <?=previewHeight?>px; font-size: 4em; text-align: center; }
+</style>
+<script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
+</script>
 <div class="container top">
   
   <ul class="breadcrumb">
@@ -18,13 +28,13 @@
       <span class="divider">/</span>
     </li>
     <li class="active">
-      Ordenación de obras destacadas
+      Ordenación
     </li>
   </ul>
   
   <div class="page-header">
     <h2>
-      Creando Obra
+      Ordenación de obras destacadas
     </h2>
   </div>
 
@@ -35,7 +45,7 @@
     {
       echo '<div class="alert alert-success">';
         echo '<a class="close" data-dismiss="alert">×</a>';
-        echo 'La obra fue creada correctamente.';
+        echo 'Las obra destacadas fueron ordenadas correctamente.';
       echo '</div>';       
     }else{
       echo '<div class="alert alert-error">';
@@ -56,45 +66,29 @@
     echo "Errores adicionales: $error";
   }
   
-  echo form_open_multipart('admin/obras/add', $attributes);
+  echo form_open_multipart('admin/obras/destacadas', $attributes);
   ?>
-    <fieldset>
-      
-      <div class="control-group">
-        <label for="inputError" class="control-label">Nombre</label>
-        <div class="controls">
-          <input type="text" id="nombre_obra" name="nombre_obra" value="<?php echo set_value('nombre_obra'); ?>" >
-        </div>
-      </div>
 
-      <div class="control-group">
-        <label for="inputError" class="control-label">Artista</label>
-        <div class="controls">
-          <input type="text" id="nombre_artista" name="nombre_artista" value="<?php echo set_value('nombre_artista'); ?>" >
-          <input type="hidden" id="id_artista" name="id_artista" value="<?php echo set_value('id_artista'); ?>" >
-        </div>
-      </div>
+  <fieldset>
 
-      <div class="control-group">
-        <label for="inputError" class="control-label">Categoría</label>
-        <div class="controls">
-          <input type="text" id="nombre_categoria_obra" name="nombre_categoria_obra" value="<?php echo set_value('nombre_categoria_obra'); ?>" >
-          <input type="hidden" id="id_categoria_obra" name="id_categoria_obra" value="<?php echo set_value('id_categoria_obra'); ?>" >
-        </div>
+    <div class="control-group">
+      <div class="controls" style="margin-left: 5px;">
+        <ul id="sortable">
+        <?php foreach($destacadas as $row): ?>
+          <li class="ui-state-default">
+            <img title="<?=$row['nombre_obra'].'/'.$row['nombre_artista']?>" alt="<?=$row['nombre_obra'].'/'.$row['nombre_artista']?>" src="<?php echo site_url("admin").'/obras/preview/'.$row['id_obra']; ?>" width="<?=$previewWidth?>" height="<?=$previewHeight?>" />
+          </li>
+        <?php endforeach ?>
+        </ul>
       </div>
+    </div>
 
-      <div class="control-group">
-        <label for="inputError" class="control-label">Archivo de imagen</label>
-        <div class="controls">
-          <input type="file" id="imagen_obra" name="imagen_obra" size="40">
-        </div>
-      </div>
-      
-      <div class="form-actions">
+    <div class="form-actions">
         <button class="btn btn-primary" type="submit">Salvar</button>
         <button class="btn" type="reset">Cancelar</button>
       </div>
-    </fieldset>
+
+  </fieldset>
 
   <?php echo form_close(); ?>
 
