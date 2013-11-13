@@ -3,14 +3,39 @@
 </script>
 <script type="text/javascript" src="<?=base_url();?>assets/js/obras.js"></script>
 <style>
-  #sortable { list-style-type: none; margin: 0; padding: 0; width: 600px; }
-  #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: <?=previewWidth?>px; height: <?=previewHeight?>px; font-size: 4em; text-align: center; }
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 900px; }
+  #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: <?=$previewWidth?>px; height: <?=$previewHeight?>px; font-size: 4em; text-align: center; cursor: pointer; }
 </style>
 <script>
+
   $(function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
+    
+    $("#sortable").sortable({
+      cursor: "move",
+      opacity: 0.5,
+      revert: true
+    });
+
+    $("#sortable").disableSelection();
   });
+
+  function rescatarOrdenacion(){
+    // Recupero los id en el orden que fueron seteados
+    var sortedIDs = $( "#sortable" ).sortable( "toArray" );
+    $("#ids_ordenados").val(JSON.stringify(sortedIDs));
+  }
+
+  $(document).ready(function(){
+
+    $("#btn-cancelar").click(function(){
+      if(confirm("Los cambios que haya hecho se perderán. ¿Continuar de todos modos?")){
+        $("#sortable").sortable("cancel");
+      }
+      return false;
+    });
+
+  });
+
 </script>
 <div class="container top">
   
@@ -58,7 +83,7 @@
   
   <?php
   //form data
-  $attributes = array('class' => 'form-horizontal', 'id' => '');
+  $attributes = array('class' => 'form-horizontal', 'id' => '', 'onsubmit' => 'rescatarOrdenacion();');
 
   //form validation
   echo validation_errors();
@@ -75,7 +100,7 @@
       <div class="controls" style="margin-left: 5px;">
         <ul id="sortable">
         <?php foreach($destacadas as $row): ?>
-          <li class="ui-state-default">
+          <li class="ui-state-default" id="<?=$row['id_obra']?>">
             <img title="<?=$row['nombre_obra'].'/'.$row['nombre_artista']?>" alt="<?=$row['nombre_obra'].'/'.$row['nombre_artista']?>" src="<?php echo site_url("admin").'/obras/preview/'.$row['id_obra']; ?>" width="<?=$previewWidth?>" height="<?=$previewHeight?>" />
           </li>
         <?php endforeach ?>
@@ -84,9 +109,11 @@
     </div>
 
     <div class="form-actions">
-        <button class="btn btn-primary" type="submit">Salvar</button>
-        <button class="btn" type="reset">Cancelar</button>
-      </div>
+      <button class="btn btn-primary" type="submit">Salvar</button>
+      <button class="btn" id="btn-cancelar">Cancelar</button>
+    </div>
+
+    <input type="hidden" name="ids_ordenados" id="ids_ordenados" />
 
   </fieldset>
 

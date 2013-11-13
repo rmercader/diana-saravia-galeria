@@ -392,24 +392,31 @@ class Admin_obras extends CI_Controller {
         //if save button was clicked, get the data sent via post
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
-
             //form validation
+            $this->form_validation->set_rules('ids_ordenados', 'Ordenacion', 'required');
+            $this->form_validation->set_message('required', 'No se ha recibido una ordenación correcta.');
             $this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>', '</strong></div>');
             
             //if the form has passed through the validation
             if ($this->form_validation->run())
             {
-                $data_to_store = array(
-                    'nombre_artista' => $this->input->post('nombre_artista'),
-                    'detalles' => $this->input->post('detalles'),
-                );
+                $jsonIds = $this->input->post('ids_ordenados');
+                $ids = json_decode($jsonIds);
+                $booleanResult = true;
+                $indice = 1;
+                foreach ($ids as $id) {
+                    $data_to_store = array(
+                        'orden' => $indice
+                    );
+                    $booleanResult = $booleanResult && $this->obras_model->update_obra($id, $data_to_store);
+                    $indice++;
+                }
                 
-                /*
-                if($this->obras_model->store_artista($data_to_store)){
+                if($booleanResult){
                     $data['flash_message'] = TRUE; 
                 }else{
                     $data['flash_message'] = FALSE; 
-                }*/
+                }
             }
 
         }
