@@ -1,6 +1,8 @@
 <?php
 
-class Eventos extends CI_Controller {
+include_once('public_controller.php');
+
+class Eventos extends PublicController {
 
 	/**
     * Responsable for auto load the mode
@@ -21,15 +23,12 @@ class Eventos extends CI_Controller {
 		//load the view
         date_default_timezone_set('America/Montevideo');
 		$data['eventos'] = $this->eventos_model->get_eventos(null, 'fecha');
+        $data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/eventos';
         $this->load->view('publico/template', $data);
 	}
 
-    private function gato(){
-        return "Nov";
-    }
-
-	public function preview(){
+    public function preview(){
 		$id = $this->uri->segment(3);
 		$fileName = "./uploads/eventos/" . $id . ".prv.jpg";
         $imgBytes = read_file($fileName);

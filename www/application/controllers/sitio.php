@@ -1,6 +1,8 @@
 <?php
 
-class Sitio extends CI_Controller {
+include_once('public_controller.php');
+
+class Sitio extends PublicController {
 
 	/**
     * Responsable for auto load the mode
@@ -20,18 +22,21 @@ class Sitio extends CI_Controller {
 
 	public function index(){
 		//load the view
+		$data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/index';
         $this->load->view('publico/template', $data);
 	}
 
 	public function la_galeria(){
 		//load the view
+		$data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/galeria';
         $this->load->view('publico/template', $data);
 	}
 
 	public function diana(){
 		//load the view
+		$data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/diana';
         $this->load->view('publico/template', $data);
 	}
@@ -85,6 +90,7 @@ class Sitio extends CI_Controller {
 		$data["mensaje"] = $consulta;
 		$data["error"] = $error;
 		//load the view
+		$data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/contacto';
         $this->load->view('publico/template', $data);
 	}

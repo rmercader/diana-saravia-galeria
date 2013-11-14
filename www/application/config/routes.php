@@ -48,6 +48,7 @@ $route['artistas/detalle/(:any)'] = 'artistas/detalle/$1';
 $route['eventos/preview/(:any)'] = 'eventos/preview/$1';
 $route['obras/preview/(:any)'] = 'obras/preview/$1';
 $route['obras/imagen/(:any)'] = 'obras/imagen/$1';
+$route['obras/imagengaleria/(:any)'] = 'obras/imagenGaleria/$1';
 $route['exposiciones'] = 'obras/index';
 $route['exposiciones/obras-categoria'] = 'obras/obrasPorCategoria';
 

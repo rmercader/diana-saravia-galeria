@@ -11,9 +11,13 @@
 				<footer>
 					<div class="bg_spinner"></div>
 					<ul class="pagination">
-						<li><a href="<?=base_url();?>images/bg_img1.jpg">1</a></li>
-						<li><a href="<?=base_url();?>images/bg_img2.jpg">2</a></li>
-						<li><a href="<?=base_url();?>images/bg_img3.jpg">3</a></li>
+					<?php
+					$i = 1;
+					foreach($imgDestacadas as $destacada): ?>
+						<li><a href="<?=base_url();?>obras/imagen/<?=$destacada['id_obra']?>"><?=$i?></a></li>
+					<?php 
+						$i++;
+					endforeach ?>
 					</ul>
 					<div class="pie">
 <span class="left">Todos los derechos reservados Diana Saravia<span style="margin-left:50px">Carlos Quijano 1288 bis / Tel. (0598) 29018401 / <a href="mailto:arte@dianasaravia.com.uy">arte@dianasaravia.com.uy</a></span></span>

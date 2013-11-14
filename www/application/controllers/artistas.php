@@ -1,6 +1,8 @@
 <?php
 
-class Artistas extends CI_Controller {
+include_once('public_controller.php');
+
+class Artistas extends PublicController {
 
 	/**
     * Responsable for auto load the mode
@@ -10,12 +12,12 @@ class Artistas extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('artistas_model');
-        $this->load->model('obras_model');
     }
 
 	public function index(){
 		//load the view
 		$data['artistas'] = $this->artistas_model->get_lista_artistas('nombre_artista');
+		$data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/artistas';
         $this->load->view('publico/template', $data);
 	}
@@ -28,6 +30,7 @@ class Artistas extends CI_Controller {
 		$data['nombre_artista'] = $artista['nombre_artista'];
 		$data['detalles'] = $artista['detalles'];
 		$data['obrasArtista'] = $this->obras_model->obras_por_artista($id);
+		$data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/detalle_artista';
         $this->load->view('publico/template', $data);
 	}

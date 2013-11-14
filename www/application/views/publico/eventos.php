@@ -45,7 +45,7 @@ function mesEsp($mes){
 					<?php foreach($eventos as $evento): ?>
 					<div class="wrapper bloque_evento">
 						<span class="date"><strong><?=date_format(new DateTime($evento['fecha']), 'd');?></strong><span><?=strtolower(mesEsp(date_format(new DateTime($evento['fecha']), 'M')));?></span></span>
-                        <figure class="left marg_right1"><img src="<?=base_url() . 'eventos/preview/' . $evento['id_evento']; ?>" alt="No disponible"></figure>
+                        <figure class="left marg_right1"><img style="border: 8px solid #FFF;" src="<?=base_url() . 'eventos/preview/' . $evento['id_evento']; ?>" alt="No disponible"></figure>
 						<div class="col2">
 							<p class="pad_bot2 color1 tit_evento"><strong><?=$evento['nombre_evento'];?></strong></p>
 							<p class="det_evento"><?=$evento['detalles'];?></p>

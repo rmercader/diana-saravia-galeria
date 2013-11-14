@@ -1,6 +1,8 @@
 <?php
 
-class Obras extends CI_Controller {
+include_once('public_controller.php');
+
+class Obras extends PublicController {
 
 	/**
     * Responsable for auto load the mode
@@ -36,22 +38,10 @@ class Obras extends CI_Controller {
         $idCategoria = $catsToPage[0]['id_categoria_obra'];        
         $data['nombre_categoria_obra'] = $catsToPage[0]['nombre_categoria_obra'];
         $data['obras'] = $this->obras_model->get_obras_categoria($idCategoria, 'nombre_artista');
+
+        $data["imgDestacadas"] = $this->imgDestacadas;
 		$data['main_content'] = 'publico/exposiciones';
         $this->load->view('publico/template', $data);
-	}
-
-	public function preview(){
-		$id = $this->uri->segment(3);
-		$fileName = "./uploads/obras/" . $id . ".prv.jpg";
-        $imgBytes = read_file($fileName);
-        if($imgBytes){
-        	$this->output
-	            ->set_content_type("image/jpeg")
-	            ->set_output($imgBytes);
-        }
-        else {
-        	echo "Imagen preview de obra no encontrada: $fileName";
-        }
 	}
 
     public function imagen(){
@@ -65,6 +55,34 @@ class Obras extends CI_Controller {
         }
         else {
             echo "Imagen de obra no encontrada: $fileName";
+        }
+    }
+
+    public function imagenGaleria(){
+        $id = $this->uri->segment(3);
+        $fileName = "./uploads/obras/" . $id . OBRA_IMAGE_GALLERY_MARKER . ".jpg";
+        $imgBytes = read_file($fileName);
+        if($imgBytes){
+            $this->output
+                ->set_content_type("image/jpeg")
+                ->set_output($imgBytes);
+        }
+        else {
+            echo "Imagen preview de obra no encontrada: $fileName";
+        }
+    }
+
+    public function preview(){
+        $id = $this->uri->segment(3);
+        $fileName = "./uploads/obras/" . $id . OBRA_IMAGE_PREVIEW_MARKER . ".jpg";
+        $imgBytes = read_file($fileName);
+        if($imgBytes){
+            $this->output
+                ->set_content_type("image/jpeg")
+                ->set_output($imgBytes);
+        }
+        else {
+            echo "Imagen preview de obra no encontrada: $fileName";
         }
     }
 
