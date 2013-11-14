@@ -213,34 +213,47 @@ class Admin_obras extends CI_Controller {
                 if(is_numeric($idObra)){
                     $data_to_store = array('ficha' => url_title("$idObra $nombreArtista $nombre_obra", '-', true));                    
                     $data['flash_message'] = $this->obras_model->update_obra($idObra, $data_to_store); 
+                    
                     $this->uploadConfig['file_name'] = $idObra;
                     $this->upload->initialize($this->uploadConfig);
                     if($this->upload->do_upload('imagen_obra')){
                         $upload_data = $this->upload->data();
 
-                        // Salvo imagen preview
+                        // Salvo imagen galeria
                         $this->imgLibConfig['source_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_PREVIEW_MARKER;
+                        $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_GALLERY_MARKER;
                         $this->imgLibConfig['new_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['width'] = OBRA_PREVIEW_WIDTH;
-                        $this->imgLibConfig['height'] = OBRA_PREVIEW_HEIGHT;
+                        $this->imgLibConfig['width'] = OBRA_GALLERY_WIDTH;
+                        $this->imgLibConfig['height'] = OBRA_GALLERY_HEIGHT;
                         $this->image_lib->initialize($this->imgLibConfig); 
                         if(! $this->image_lib->resize())
                         {
                             $data['error'] = $this->image_lib->display_errors() . "<br>";
-                        } else {
-                            // Salvo imagen thumbnail
-                            $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_THUMB_MARKER;
-                            $this->imgLibConfig['width'] = OBRA_THUMB_WIDTH;
-                            $this->imgLibConfig['height'] = OBRA_THUMB_HEIGHT;
-                            $this->image_lib->clear();
+                        }
+                        else {
+                            // Salvo imagen preview
+                            $this->imgLibConfig['source_image'] = $upload_data['full_path'];
+                            $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_PREVIEW_MARKER;
+                            $this->imgLibConfig['new_image'] = $upload_data['full_path'];
+                            $this->imgLibConfig['width'] = OBRA_PREVIEW_WIDTH;
+                            $this->imgLibConfig['height'] = OBRA_PREVIEW_HEIGHT;
                             $this->image_lib->initialize($this->imgLibConfig); 
                             if(! $this->image_lib->resize())
                             {
-                                $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                                $data['error'] = $this->image_lib->display_errors() . "<br>";
+                            } else {
+                                // Salvo imagen thumbnail
+                                $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_THUMB_MARKER;
+                                $this->imgLibConfig['width'] = OBRA_THUMB_WIDTH;
+                                $this->imgLibConfig['height'] = OBRA_THUMB_HEIGHT;
+                                $this->image_lib->clear();
+                                $this->image_lib->initialize($this->imgLibConfig); 
+                                if(! $this->image_lib->resize())
+                                {
+                                    $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                                }
                             }
                         }
-
                     } else {
                         $upload_data = $this->upload->data();
                         if(is_array($upload_data) && !empty($upload_data['file_name'])){
@@ -305,29 +318,42 @@ class Admin_obras extends CI_Controller {
                     $this->uploadConfig['file_name'] = $id;
                     $this->uploadConfig['overwrite'] = true;
                     $this->upload->initialize($this->uploadConfig);
+
                     if($this->upload->do_upload('imagen_obra')){
                         $upload_data = $this->upload->data();
 
-                        // Salvo imagen preview
+                        // Salvo la imagen galeria
                         $this->imgLibConfig['source_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_PREVIEW_MARKER;
+                        $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_GALLERY_MARKER;
                         $this->imgLibConfig['new_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['width'] = OBRA_PREVIEW_WIDTH;
-                        $this->imgLibConfig['height'] = OBRA_PREVIEW_HEIGHT;
-                        $this->image_lib->initialize($this->imgLibConfig); 
+                        $this->imgLibConfig['width'] = OBRA_GALLERY_WIDTH;
+                        $this->imgLibConfig['height'] = OBRA_GALLERY_HEIGHT;
+                        $this->image_lib->initialize($this->imgLibConfig);     
                         if(!$this->image_lib->resize())
                         {
                             $data['error'] = $this->image_lib->display_errors() . "<br>";
                         } else {
-                            // Salvo imagen thumbnail
-                            $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_THUMB_MARKER;
-                            $this->imgLibConfig['width'] = OBRA_THUMB_WIDTH;
-                            $this->imgLibConfig['height'] = OBRA_THUMB_HEIGHT;
-                            $this->image_lib->clear();
+                            // Salvo imagen preview
+                            $this->imgLibConfig['source_image'] = $upload_data['full_path'];
+                            $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_PREVIEW_MARKER;
+                            $this->imgLibConfig['new_image'] = $upload_data['full_path'];
+                            $this->imgLibConfig['width'] = OBRA_PREVIEW_WIDTH;
+                            $this->imgLibConfig['height'] = OBRA_PREVIEW_HEIGHT;
                             $this->image_lib->initialize($this->imgLibConfig); 
-                            if(! $this->image_lib->resize())
+                            if(!$this->image_lib->resize())
                             {
-                                $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                                $data['error'] = $this->image_lib->display_errors() . "<br>";
+                            } else {
+                                // Salvo imagen thumbnail
+                                $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_THUMB_MARKER;
+                                $this->imgLibConfig['width'] = OBRA_THUMB_WIDTH;
+                                $this->imgLibConfig['height'] = OBRA_THUMB_HEIGHT;
+                                $this->image_lib->clear();
+                                $this->image_lib->initialize($this->imgLibConfig); 
+                                if(! $this->image_lib->resize())
+                                {
+                                    $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                                }
                             }
                         }
 
@@ -380,8 +406,9 @@ class Admin_obras extends CI_Controller {
         $id = $this->uri->segment(4);
         $this->obras_model->delete_obra($id);
         @unlink($this->uploadConfig['upload_path'] . $id . "." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . ".prv." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . ".thu." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_GALLERY_MARKER . "." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_PREVIEW_MARKER . "." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_THUMB_MARKER . "." . $this->uploadConfig['allowed_types']);
         redirect('admin/obras');
     }
 
