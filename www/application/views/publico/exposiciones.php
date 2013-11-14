@@ -109,7 +109,7 @@
 						<h2><?=$nombre_categoria_obra?></h2>
 						<div class="wrapper yoxview" id="obras-categoria">
 						<?php foreach($obras as $obra): ?>
-						<figure class="left dis_imadet"><a href="<?=base_url();?>uploads/obras/<?=$obra['id_obra'];?>.jpg" title="<?=$obra['nombre_obra']?> / <?=$obra['nombre_artista']?>" class="lightbox-image" data-type="prettyPhoto[group2]"><span></span><img title="<?=$obra['nombre_obra']?> / <?=$obra['nombre_artista']?>" src="<?=base_url();?>uploads/obras/<?=$obra['id_obra'];?>.prv.jpg" alt=""></a></figure>
+						<figure class="left dis_imadet"><a href="<?=base_url();?>uploads/obras/<?=$obra['id_obra'];?>.gal.jpg" title="<?=$obra['nombre_obra']?> / <?=$obra['nombre_artista']?>" class="lightbox-image" data-type="prettyPhoto[group2]"><span></span><img title="<?=$obra['nombre_obra']?> / <?=$obra['nombre_artista']?>" src="<?=base_url();?>uploads/obras/<?=$obra['id_obra'];?>.prv.jpg" alt=""></a></figure>
 						<?php endforeach; ?>
 						</div>
 					</div>

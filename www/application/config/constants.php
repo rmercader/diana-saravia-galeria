@@ -42,11 +42,14 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 |--------------------------------------------------------------------------
 */
 
+define("OBRA_GALLERY_WIDTH", 800);
+define("OBRA_GALLERY_HEIGHT", 600);
 define("OBRA_PREVIEW_WIDTH", 202);
 define("OBRA_PREVIEW_HEIGHT", 128);
 define("OBRA_THUMB_WIDTH", 101);
 define("OBRA_THUMB_HEIGHT", 64);
 define("OBRA_IMAGE_QUALITY", 100);
+define("OBRA_IMAGE_GALLERY_MARKER", ".gal");
 define("OBRA_IMAGE_PREVIEW_MARKER", ".prv");
 define("OBRA_IMAGE_THUMB_MARKER", ".thu");
 
