@@ -37,7 +37,7 @@ function mesEsp($mes){
 <li id="page_Eventos">
 	<div class="box1">
 		<div class="inner">
-			<a href="#" class="close" data-type="close"><span></span></a>
+			<a href="<?=base_url();?>" class="close" data-type="close"><span></span></a>
 			<div class="wrapper pad_bot1">
 				
 				<div class="col1 pad_left1 aneventos">

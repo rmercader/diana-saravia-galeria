@@ -186,6 +186,9 @@ class Admin_obras extends CI_Controller {
 
     public function add()
     {
+        ini_set("display_errors", "on");
+        ini_set("memory_limit", "64M");
+        error_reporting(E_ALL);
         //if save button was clicked, get the data sent via post
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
@@ -201,10 +204,17 @@ class Admin_obras extends CI_Controller {
             {
                 $nombre_obra = $this->input->post('nombre_obra');
                 $id_artista = $this->input->post('id_artista');
+                if($this->input->post('destacada')){
+                    $destacada = 1;
+                }
+                else {
+                    $destacada = 0;
+                }
                 $data_to_store = array(
                     'nombre_obra' => $nombre_obra,
                     'id_artista' => $id_artista,
-                    'id_categoria_obra' => $this->input->post('id_categoria_obra')                    
+                    'id_categoria_obra' => $this->input->post('id_categoria_obra'),
+                    'destacada' => $destacada
                 );
 
                 //if the insert has returned id then we show the flash message
@@ -229,6 +239,7 @@ class Admin_obras extends CI_Controller {
                         if(! $this->image_lib->resize())
                         {
                             $data['error'] = $this->image_lib->display_errors() . "<br>";
+                            log_message("error", $this->image_lib->display_errors());
                         }
                         else {
                             // Salvo imagen preview
@@ -241,6 +252,7 @@ class Admin_obras extends CI_Controller {
                             if(! $this->image_lib->resize())
                             {
                                 $data['error'] = $this->image_lib->display_errors() . "<br>";
+                                log_message("error", $this->image_lib->display_errors());
                             } else {
                                 // Salvo imagen thumbnail
                                 $this->imgLibConfig['thumb_marker'] = OBRA_IMAGE_THUMB_MARKER;
@@ -251,6 +263,22 @@ class Admin_obras extends CI_Controller {
                                 if(! $this->image_lib->resize())
                                 {
                                     $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                                    log_message("error", $this->image_lib->display_errors());
+                                }
+                                else {
+                                    // Finalmente grabo la imagen al tamano maximo
+                                    $this->imgLibConfig['source_image'] = $upload_data['full_path'];
+                                    $this->imgLibConfig['thumb_marker'] = '';
+                                    $this->imgLibConfig['width'] = OBRA_IMAGE_WIDTH;
+                                    $this->imgLibConfig['height'] = OBRA_IMAGE_HEIGHT;
+                                    $this->imgLibConfig['create_thumb'] = FALSE;
+                                    $this->imgLibConfig['maintain_ratio'] = FALSE;
+                                    $this->image_lib->initialize($this->imgLibConfig); 
+                                    if(! $this->image_lib->resize())
+                                    {
+                                        $data['error'] = $this->image_lib->display_errors() . "<br>";
+                                        log_message("error", $this->image_lib->display_errors());
+                                    }
                                 }
                             }
                         }
@@ -264,7 +292,6 @@ class Admin_obras extends CI_Controller {
                     $data['flash_message'] = FALSE; 
                 } 
             }
-
         }
         //load the view
         $data['main_content'] = 'admin/obras/add';
@@ -277,6 +304,9 @@ class Admin_obras extends CI_Controller {
     */
     public function update()
     {
+        ini_set("display_errors", "on");
+        ini_set("memory_limit", "64M");
+        error_reporting(E_ALL);
         //obra id 
         $id = $this->uri->segment(4);
 
@@ -353,6 +383,20 @@ class Admin_obras extends CI_Controller {
                                 if(! $this->image_lib->resize())
                                 {
                                     $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                                }
+                                else {
+                                    // Finalmente grabo la imagen al tamano maximo
+                                    $this->imgLibConfig['source_image'] = $upload_data['full_path'];
+                                    $this->imgLibConfig['thumb_marker'] = '';
+                                    $this->imgLibConfig['width'] = OBRA_IMAGE_WIDTH;
+                                    $this->imgLibConfig['height'] = OBRA_IMAGE_HEIGHT;
+                                    $this->imgLibConfig['create_thumb'] = FALSE;
+                                    $this->imgLibConfig['maintain_ratio'] = FALSE;
+                                    $this->image_lib->initialize($this->imgLibConfig); 
+                                    if(! $this->image_lib->resize())
+                                    {
+                                        $data['error'] = $this->image_lib->display_errors() . "<br>";
+                                    }
                                 }
                             }
                         }

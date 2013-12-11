@@ -16,7 +16,7 @@
 <li id="page_Contacto">
 	<div class="box1">
 		<div class="inner">
-			<a href="#" class="close" data-type="close"><span></span></a>
+			<a href="<?=base_url();?>" class="close" data-type="close"><span></span></a>
 			<div class="wrapper">
 				<div class="col1">
 					<h2>Contacto</h2>

@@ -9,7 +9,7 @@
 <li id="page_Diana">
 	<div class="box1">
 		<div class="inner">
-			<a href="#" class="close" data-type="close"><span></span></a>
+			<a href="<?=base_url();?>" class="close" data-type="close"><span></span></a>
 			<h2>Diana Saravia</h2>
 			<div class="wrapper">
 				<figure class="left marg_right1"><img src="images/page2_img1.jpg" alt=""></figure>

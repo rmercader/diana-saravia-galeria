@@ -43,6 +43,6 @@ function installGalleries(){
 		pagination:'.pagination',
 		preload:true,
 		spinner:'.bg_spinner',
-		slideshow: 2000
+		slideshow: 8000
 	})
 }

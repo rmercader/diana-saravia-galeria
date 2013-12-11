@@ -42,6 +42,8 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 |--------------------------------------------------------------------------
 */
 
+define("OBRA_IMAGE_WIDTH", 1280);
+define("OBRA_IMAGE_HEIGHT", 960);
 define("OBRA_GALLERY_WIDTH", 800);
 define("OBRA_GALLERY_HEIGHT", 600);
 define("OBRA_PREVIEW_WIDTH", 186);

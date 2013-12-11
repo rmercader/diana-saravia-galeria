@@ -9,7 +9,7 @@
 <li id="page_Home">
 	<div class="box1">
 		<div class="inner">
-			<a href="#" class="close" data-type="close"><span></span></a>
+			<a href="<?=base_url();?>" class="close" data-type="close"><span></span></a>
 			<div class="wrapper pad_bot1">
 				<div class="col1">
 					<h2>La Galería</h2>

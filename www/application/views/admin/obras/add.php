@@ -82,6 +82,13 @@
       </div>
 
       <div class="control-group">
+        <label for="inputError" class="control-label">Destacada</label>
+          <div class="controls">
+            <input type="checkbox" id="destacada" name="destacada" <?php if(set_value('destacada')){echo 'checked="checked"';} ?> >
+          </div>
+       </div>
+
+      <div class="control-group">
         <label for="inputError" class="control-label">Archivo de imagen</label>
         <div class="controls">
           <input type="file" id="imagen_obra" name="imagen_obra" size="40">

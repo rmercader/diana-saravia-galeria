@@ -9,7 +9,7 @@
 <li id="page_Artistas">
 	<div class="box1">
 		<div class="inner">
-			<a href="#" class="close" data-type="close"><span></span></a>
+			<a href="<?=base_url();?>" class="close" data-type="close"><span></span></a>
 			<div class="wrapper pad_bot3">
 				<h2>Artistas</h2>
 				<div class="col1 esp_artistas">
