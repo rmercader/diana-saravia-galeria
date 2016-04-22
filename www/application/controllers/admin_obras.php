@@ -29,7 +29,7 @@ class Admin_obras extends CI_Controller {
         // Manejo de uploads
         $this->uploadConfig = array();
         $this->uploadConfig['upload_path'] = './uploads/obras/';
-        $this->uploadConfig['allowed_types'] = 'jpg';
+        $this->uploadConfig['allowed_types'] = 'jpg|JPG';
         $this->uploadConfig['overwrite'] = true;
         $this->load->library('upload');
 
@@ -214,7 +214,8 @@ class Admin_obras extends CI_Controller {
                     'nombre_obra' => $nombre_obra,
                     'id_artista' => $id_artista,
                     'id_categoria_obra' => $this->input->post('id_categoria_obra'),
-                    'destacada' => $destacada
+                    'destacada' => $destacada,
+                    'info_tecnica' => $this->input->post('info_tecnica')
                 );
 
                 //if the insert has returned id then we show the flash message
@@ -338,7 +339,8 @@ class Admin_obras extends CI_Controller {
                     'nombre_obra' => $nombre_obra,
                     'id_artista' => $id_artista,
                     'id_categoria_obra' => $this->input->post('id_categoria_obra'),
-                    'destacada' => $destacada
+                    'destacada' => $destacada,
+                    'info_tecnica' => $this->input->post('info_tecnica')
                 );
 
                 //if the insert has returned true then we show the flash message
@@ -431,7 +433,7 @@ class Admin_obras extends CI_Controller {
 
     public function thumbnail(){
         $id = $this->uri->segment(4);
-        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".thu." . $this->uploadConfig['allowed_types']);
+        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".thu.jpg");
         $this->output
             ->set_content_type("image/jpeg")
             ->set_output($imgBytes);
@@ -439,7 +441,7 @@ class Admin_obras extends CI_Controller {
 
      public function preview(){
         $id = $this->uri->segment(4);
-        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".prv." . $this->uploadConfig['allowed_types']);
+        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".prv.jpg");
         $this->output
             ->set_content_type("image/jpeg")
             ->set_output($imgBytes);
@@ -449,10 +451,10 @@ class Admin_obras extends CI_Controller {
     {
         $id = $this->uri->segment(4);
         $this->obras_model->delete_obra($id);
-        @unlink($this->uploadConfig['upload_path'] . $id . "." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_GALLERY_MARKER . "." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_PREVIEW_MARKER . "." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_THUMB_MARKER . "." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . ".jpg");
+        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_GALLERY_MARKER . ".jpg");
+        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_PREVIEW_MARKER . ".jpg");
+        @unlink($this->uploadConfig['upload_path'] . $id . OBRA_IMAGE_THUMB_MARKER . ".jpg");
         redirect('admin/obras');
     }
 

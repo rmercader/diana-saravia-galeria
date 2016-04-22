@@ -62,6 +62,7 @@
         <thead>
           <tr>
             <th class="yellow header headerSortDown">Nombre</th>
+            <th class="yellow header headerSortDown">Información técnica</th>
             <th class="yellow header headerSortDown">Artista</th>
             <th class="yellow header headerSortDown">Categoría</th>
             <th class="yellow header headerSortDown">Destacada</th>
@@ -74,6 +75,7 @@
           {
             echo '<tr>';
             echo '<td>'.$row['nombre_obra'].'</td>';
+            echo '<td>'.nl2br($row['info_tecnica']).'</td>';
             echo '<td>'.$row['nombre_artista'].'</td>';
             echo '<td>'.$row['nombre_categoria_obra'].'</td>';
             $destacadaDsc = $row['destacada'] ? 'Si' : 'No';

@@ -66,6 +66,13 @@
       </div>
 
       <div class="control-group">
+        <label for="inputError" class="control-label">Información técnica</label>
+        <div class="controls">
+          <textarea id="info_tecnica" name="info_tecnica" style="margin: 0px;height: 150px;width: 400px;"><?php echo set_value('info_tecnica'); ?></textarea>
+        </div>
+      </div>
+
+      <div class="control-group">
         <label for="inputError" class="control-label">Artista</label>
         <div class="controls">
           <input type="text" id="nombre_artista" name="nombre_artista" value="<?php echo set_value('nombre_artista'); ?>" >

@@ -45,7 +45,7 @@
 							<ul id="menu">
                                 <li><a href="<?=base_url();?>la-galeria" id="link-la-galeria"><span></span><strong>La Galería</strong></a></li>
                                 <li><a href="<?=base_url();?>diana" id="link-diana"><span></span><strong>Diana Saravia</strong></a></li>
-								<li><a href="<?=base_url();?>exposiciones" id="link-exposiciones"><span></span><strong>Exposiciones</strong></a></li>
+								<li><a href="<?=base_url();?>exposiciones" id="link-exposiciones"><span></span><strong>Exhibiciones</strong></a></li>
                                 <li><a href="<?=base_url();?>eventos" id="link-eventos"><span></span><strong>Eventos</strong></a></li>
 								<li><a href="<?=base_url();?>artistas" id="link-artistas"><span></span><strong>Artistas</strong></a></li>
 								<li><a href="<?=base_url();?>contacto" id="link-contacto"><span></span><strong>Contacto</strong></a></li>

@@ -10,17 +10,17 @@
       <?php 
       $attributes = array('class' => 'form-signin');
       echo form_open('admin/login/validate_credentials', $attributes);
-      echo '<h2 class="form-signin-heading">Login</h2>';
-      echo form_input('user_name', '', 'placeholder="Username"');
-      echo form_password('password', '', 'placeholder="Password"');
+      echo '<h2 class="form-signin-heading">Administración - Inicio de Sesión</h2>';
+      echo form_input('user_name', '', 'placeholder="Nombre de usuario"');
+      echo form_password('password', '', 'placeholder="Contraseña"');
       if(isset($message_error) && $message_error){
           echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
-            echo '<strong>Oh snap!</strong> Change a few things up and try submitting again.';
+            echo '<strong>Falla en la autenticación.</strong> Nombre de usuario y/o contraseña incorrectos.';
           echo '</div>';             
       }
       echo "<br />";
-      echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');
+      echo form_submit('submit', 'Ingresar', 'class="btn btn-large btn-primary"');
       echo form_close();
       ?>      
     </div><!--container-->

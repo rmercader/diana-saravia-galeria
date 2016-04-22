@@ -64,6 +64,13 @@
 	        </div>
 	    </div>
 
+      <div class="control-group">
+        <label for="inputError" class="control-label">Información técnica</label>
+        <div class="controls">
+          <textarea id="info_tecnica" name="info_tecnica" style="margin: 0px;height: 150px;width: 400px;"><?php echo $obra[0]['info_tecnica']; ?></textarea>
+        </div>
+      </div>
+
   		<div class="control-group">
   			<label for="inputError" class="control-label">Artista</label>
   			<div class="controls">

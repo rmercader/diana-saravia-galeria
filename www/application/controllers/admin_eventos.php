@@ -27,7 +27,7 @@ class Admin_eventos extends CI_Controller {
         // Manejo de uploads
         $this->uploadConfig = array();
         $this->uploadConfig['upload_path'] = './uploads/eventos/';
-        $this->uploadConfig['allowed_types'] = 'jpg';
+        $this->uploadConfig['allowed_types'] = 'jpg|JPG';
         $this->uploadConfig['overwrite'] = true;
         $this->load->library('upload');
 
@@ -334,7 +334,11 @@ class Admin_eventos extends CI_Controller {
         //the code below wel reload the current data
 
         //evento data 
-        $data['evento'] = $this->eventos_model->get_evento_by_id($id);
+        $datosEvento = $this->eventos_model->get_evento_by_id($id);
+        if(count($datosEvento) > 0){
+            $data['evento'] = $datosEvento;
+        }
+        
         //load the view
         $data['main_content'] = 'admin/eventos/edit';
         $this->load->view('includes/template', $data);            
@@ -343,7 +347,7 @@ class Admin_eventos extends CI_Controller {
 
     public function thumbnail(){
         $id = $this->uri->segment(4);
-        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".thu." . $this->uploadConfig['allowed_types']);
+        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".thu.jpg");
         $this->output
             ->set_content_type("image/jpeg")
             ->set_output($imgBytes);
@@ -351,7 +355,7 @@ class Admin_eventos extends CI_Controller {
 
      public function preview(){
         $id = $this->uri->segment(4);
-        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".prv." . $this->uploadConfig['allowed_types']);
+        $imgBytes = read_file($this->uploadConfig['upload_path'] . $id . ".prv.jpg");
         $this->output
             ->set_content_type("image/jpeg")
             ->set_output($imgBytes);
@@ -361,9 +365,9 @@ class Admin_eventos extends CI_Controller {
     {
         $id = $this->uri->segment(4);
         $this->eventos_model->delete_evento($id);
-        @unlink($this->uploadConfig['upload_path'] . $id . "." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . ".prv." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . ".thu." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . ".jpg");
+        @unlink($this->uploadConfig['upload_path'] . $id . ".prv.jpg");
+        @unlink($this->uploadConfig['upload_path'] . $id . ".thu.jpg");
         redirect('admin/eventos');
     }
 
